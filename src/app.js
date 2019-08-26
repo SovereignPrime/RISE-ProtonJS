@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchPanel from './components/search.js'
-import PlusMenu from './components/search.js'
+import PlusMenu from './components/plusMenu.js'
+import NavbarMenu from './components/navbarMenu.js'
 
 
 export default class App extends React.Component {
@@ -20,20 +21,24 @@ export default class App extends React.Component {
   }
 
   handleSearch(event) {
-    log.info(event.target);
-    alert('Отправленное имя: ' + this.state.searchValue);
+    let searchValue = event.target.searchValue.value
+    alert('Отправленное имя: ' +searchValue);
     event.preventDefault();
   }
 
   render() {
     return (
-      <div className={'hello'}>
-        <div>Val:{this.state.searchValue} </div>
-        <SearchPanel 
-          onSubmit={this.handleSearch} 
-          searchValue={this.state.searchValue} 
-          onChange={this.handleChange} 
-        />
+      <div className={''}>
+        <div className={'container'}>
+          <div className='row'> 
+            <SearchPanel 
+              onSubmit={this.handleSearch} 
+            />
+            <PlusMenu/>
+          </div>
+        </div>
+
+        <NavbarMenu/>
       </div>
     );
   }

@@ -1,0 +1,27 @@
+[
+		{"id": 1,
+		"subject": "test", 
+		"from": "Dan", 
+		"to": "server",  
+		"text": "test message", 
+		"date": "2019-08-25T10:30:17.970Z", 
+		"status": "active"
+		},
+		{"id": 2,
+		"subject": "test2", 
+		"from": "Dan2", 
+		"to": "server2",  
+		"text": "test message2", 
+		"date": "2019-08-26T22:30:17.970Z", 
+		"status": "active"
+		},
+		{"id": 3,
+		"subject": "test3", 
+		"from": "Dan3", 
+		"to": "server3",  
+		"text": "test message3", 
+		"date": "2019-08-27T10:30:17.970Z", 
+		"status": "active"
+		}
+]
+

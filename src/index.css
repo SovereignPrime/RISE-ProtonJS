@@ -1,0 +1,17 @@
+#dropdown-plus:after{
+	content: "" !important;
+}
+
+#dropdown-plus {
+	/*width: 20px;*/
+}
+
+/*.profile-dropdown {
+	margin-left:20px;
+}
+.profile-dropdown:before {
+  content: "123";
+  display: inline-block;
+  float: left;
+  background-color: red;
+}*/

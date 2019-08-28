@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap'
+import {formatTimedelta, callTimedelta} from '../utils'
 
 
 class MessagesLeftList extends React.Component {
@@ -15,7 +16,7 @@ class MessagesLeftList extends React.Component {
 				    		<div className='font-weight-bold '>{m.subject}</div>
 			        </Col>
 			        <Col xs={3}>
-			        	{m.date.slice(0, 10) }  {/*TODO*/}
+			        	{formatTimedelta(callTimedelta(m.date)) }  {/*TODO*/}
 			        </Col>
 			    	</Row>
 			    )

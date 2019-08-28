@@ -10,7 +10,9 @@ class NavbarMenu extends React.Component {
 		  <Navbar.Toggle aria-controls="basic-navbar-nav" />
 		  <Navbar.Collapse id="basic-navbar-nav">
 		    <Nav className="mr-auto">
+		    	<i className='fa fa-filter mt-2 ml-1'></i>
 		      <Nav.Link href="#home">SMART FILTER</Nav.Link>
+		      <i className='fa fa-archive mt-2 ml-1'></i>
 		      <Nav.Link href="#archive">ARCHIVE</Nav.Link>
 		      <i className='fa fa-user mt-2 ml-1'></i>
 		      <NavDropdown title="MY PROFILE" id="profile-dropdown" className="">
@@ -18,7 +20,8 @@ class NavbarMenu extends React.Component {
 		        <NavDropdown.Item href="#action/3.2">Backup user</NavDropdown.Item>
 		        <NavDropdown.Item href="#action/3.3">Restore user</NavDropdown.Item>
 		      </NavDropdown>
-		      <NavDropdown title="?HELP" id="help-dropdown ">
+		      <i className='fa fa-question mt-2 ml-1'></i>
+		      <NavDropdown title="HELP" id="help-dropdown ">
 		      	<NavDropdown.Item href="#download_logs">Download logs</NavDropdown.Item>
 		      	<NavDropdown.Item href="#">For support: {this.props.supportEmail}</NavDropdown.Item>
 		      </NavDropdown>

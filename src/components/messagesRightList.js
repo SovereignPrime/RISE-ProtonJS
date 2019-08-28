@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap'
+import {formatTimedelta, callTimedelta} from '../utils'
 
 
 class MessagesRightList extends React.Component {
@@ -20,7 +21,7 @@ class MessagesRightList extends React.Component {
 			        </Col>
 
 			        <Col >
-			        	{m.date}
+			        	{formatTimedelta(callTimedelta(m.date)) } 
 			        </Col>
 			    	</Row>
 			    )

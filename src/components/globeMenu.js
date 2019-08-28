@@ -9,9 +9,9 @@ class GlobeMenu extends React.Component {
 			    <i className='fa fa-globe'></i>
 			  </Dropdown.Toggle>
 			  <Dropdown.Menu>
-			    <Dropdown.Item href="#/action-1">Updates</Dropdown.Item>
-			    <Dropdown.Item href="#/action-2">Tasks</Dropdown.Item>
-			    <Dropdown.Item href="#/action-3">Contacts</Dropdown.Item>
+			    <Dropdown.Item href="#/action-1"><i className='fa fa-envelope'> Updates</i></Dropdown.Item>
+			    <Dropdown.Item href="#/action-2"><i className='fa fa-tasks'> Tasks</i></Dropdown.Item>
+			    <Dropdown.Item href="#/action-3"><i className='fa fa-address-card'> Contacts</i></Dropdown.Item>
 			  </Dropdown.Menu>
 			</Dropdown>
 

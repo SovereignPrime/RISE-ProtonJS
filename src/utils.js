@@ -29,3 +29,11 @@ export function strFormat(str) {
 
     return str.replace(/%s/g, () => args[i++]);
 }
+
+export function arr1_minus_arr2(arr1, arr2) {
+	let result;
+	if (Array.isArray(arr1) && Array.isArray(arr2)) {
+		result = arr1.filter(word => arr2.indexOf(word) == -1)
+	}
+	return result;
+}

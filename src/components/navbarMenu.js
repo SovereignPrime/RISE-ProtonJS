@@ -27,6 +27,10 @@ class NavbarMenu extends React.Component {
 		      </NavDropdown>
 		    </Nav>
 		  </Navbar.Collapse>
+		  <button className='btn btn-info btn-sm' onClick={this.props.refresh} 
+		  	title="Refresh messages" >
+        <i className='fa fa-refresh'></i>
+      </button>
 		</Navbar>
     );
   }

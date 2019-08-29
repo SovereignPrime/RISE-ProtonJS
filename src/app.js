@@ -23,20 +23,34 @@ export default class App extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.getMessages = this.getMessages.bind(this);
+    this.refreshMessages = this.refreshMessages.bind(this);
   }
 
   componentDidMount() {
     // const loadData = () => JSON.parse(JSON.stringify(jsonMessages));
     log.info(Message._rise);
-      Message.getAll({start: 0, count: 10})
-          .then((messages) => {
-              this.setState(state => ({
-                  messages:  messages
-              }))
-          })
-          .catch((e) => {
-              log.error(e);
-          });
+    let cid = rise.id()
+      .then((id) => {log.info("cid:", id)});
+    this.getMessages()
+  }
+
+  getMessages() {
+    Message.getAll({start: 0, count: 10})
+      .then((messages) => {
+          this.setState(state => ({
+              messages:  messages
+          }));
+          log.info("messages:", this.state.messages.length);
+      })
+      .catch((e) => {
+          log.error(e);
+      });
+  }
+
+  refreshMessages(event) {
+    this.getMessages();
+    event.preventDefault();
   }
 
   handleChange(event) {
@@ -62,7 +76,10 @@ export default class App extends React.Component {
           <PlusMenu/>
         </Row>
 
-        <NavbarMenu supportEmail={supportEmail}/>
+        <NavbarMenu 
+          supportEmail={supportEmail}
+          refresh={this.refreshMessages}
+        />
 
         <Row>
           <Col xs={3} >

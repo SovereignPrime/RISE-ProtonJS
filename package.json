@@ -27,6 +27,7 @@
     "babel-jest": "^24.8.0",
     "electron": "~5.0.1",
     "electron-builder": "^20.39.0",
+    "electron-devtools-installer": "^2.2.4",
     "electron-log": "^3.0.7",
     "electron-react-devtools": "^0.5.3",
     "gulp": "^4.0.2",

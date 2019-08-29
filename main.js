@@ -16,15 +16,15 @@ const createWindow = () => {
     }
   });
 
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
 
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
+    mainWindow.on('closed', () => {
+        mainWindow = null;
+    });
 };
 
 app.on('ready', createWindow);

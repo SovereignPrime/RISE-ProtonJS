@@ -6,6 +6,20 @@
 	/*width: 20px;*/
 }
 
+.mw-300p {
+	min-width: 300px;
+}
+.dropdown-menu-right{
+	right: 0 !important;
+}
+.z-1 {
+	z-index: 1;
+}
+#window-size{
+	min-width: 400px;
+	min-height: 400px;
+}
+
 /*.profile-dropdown {
 	margin-left:20px;
 }

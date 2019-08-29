@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap'
-import { Message, rise } from 'risejs'
+import { Message } from 'risejs'
 
 import SearchPanel from './components/search.js'
 import PlusMenu from './components/plusMenu.js'
@@ -27,7 +27,8 @@ export default class App extends React.Component {
   componentDidMount() {
     // const loadData = () => JSON.parse(JSON.stringify(jsonMessages));
     let messages = Message.getAll({start: 0, count: 10}); 
-    // log.info("messages:",  rise.id())
+    // let id =  rise.id()
+    // log.info("rise:",  id)
     this.setState(state => ({
       messages:  messages
     }))
@@ -47,21 +48,19 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Container>
-        <div className={''}>
-          <Row> 
-            <GlobeMenu/>
-            <SearchPanel 
-              onSubmit={this.handleSearch} 
-            />
-            <PlusMenu/>
-          </Row>
-        </div>
+      <Container fluid={true} id={'window-size'}>
+        <Row> 
+          <GlobeMenu/>
+          <SearchPanel 
+            onSubmit={this.handleSearch} 
+          />
+          <PlusMenu/>
+        </Row>
 
         <NavbarMenu supportEmail={supportEmail}/>
 
         <Row>
-          <Col xs={3}>
+          <Col xs={3} >
             <MessagesLeftList
               messages={this.state.messages}
             />

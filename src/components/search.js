@@ -1,23 +1,21 @@
-import React from "react";
+import React from 'react';
+import { Col } from 'react-bootstrap'
 
 class SearchPanel extends React.Component {
   render() {
     return (
-          <div className='col-10'>
-            <div className='search-box '>
-              <form className='form-row ' onSubmit={this.props.onSubmit}>
-                <div className="col ">
-                  <input className='form-control ' name='searchValue' placeholder='Search' type='search' />
-                </div>
-                <div className="col">
-                  <button className='btn btn-info' type="submit" >
-                    <i className='fa fa-search'></i>
-                  </button>
-                </div>
-              </form>
-              
-            </div>
-          </div>
+      <Col xs={10} sm={9} md={10} className=''>
+        <form className='form-row row ' onSubmit={this.props.onSubmit}>
+          <Col xs={10} sm={11} >
+            <input className='form-control ' name='searchValue' placeholder='Search' type='search' />
+          </Col>
+          <Col xs={2} sm={1} >
+            <button className='btn btn-info' type='submit' >
+              <i className='fa fa-search'></i>
+            </button>
+          </Col>
+        </form>
+      </Col>
     );
   }
 }

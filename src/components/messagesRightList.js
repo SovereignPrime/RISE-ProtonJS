@@ -34,7 +34,7 @@ class MessagesRightList extends React.Component {
   	}
 
     return (
-    	<div className="pt-2">
+    	<div className='pt-2'>
 	    	{renderData}
     </div>
     );

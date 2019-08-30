@@ -20,6 +20,9 @@
 	min-height: 400px;
 }
 
+.update-link:hover{
+	cursor: pointer;
+}
 /*.profile-dropdown {
 	margin-left:20px;
 }

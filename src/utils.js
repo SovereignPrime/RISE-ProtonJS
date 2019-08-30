@@ -37,3 +37,35 @@ export function arr1_minus_arr2(arr1, arr2) {
 	}
 	return result;
 }
+
+export function getLastMessage(arr) {
+	let last = arr[0];
+	for (let el of arr) {
+		if (last && last.timestamp >= el.timestamp) {
+			last = el;
+		}
+	}
+	return last;
+}
+
+export function groupMessages(messages) {
+  var grouppedMessages = [];
+  for (let m of messages) {
+    let index = m.subject;
+    if (!grouppedMessages[index]) {
+      grouppedMessages[index] = [];
+    }
+    grouppedMessages[index].push(m);
+  }
+  return grouppedMessages
+}
+
+export function fillSubjects(messages) {
+	let subjects = []
+	for (let m of messages) {
+		if (subjects.indexOf(m.subject) == -1) {
+			subjects.push(m.subject)
+		}
+	}
+	return subjects
+}

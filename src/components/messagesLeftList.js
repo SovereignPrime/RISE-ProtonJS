@@ -7,7 +7,8 @@ class MessagesLeftList extends React.Component {
 
   render() {
   	
-  	let hasMessages = Array.isArray(this.props.messages) && (this.props.messages !== []);
+  	let hasMessages = Array.isArray(this.props.messages) && 
+  		(Object.keys(this.props.messages).length !== 0);
   	let renderData;
 
   	if (hasMessages) {

@@ -31,7 +31,7 @@ export function strFormat(str) {
 }
 
 export function arr1_minus_arr2(arr1, arr2) {
-	let result;
+	let result=[];
 	if (Array.isArray(arr1) && Array.isArray(arr2)) {
 		result = arr1.filter(word => arr2.indexOf(word) == -1)
 	}
@@ -68,4 +68,16 @@ export function fillSubjects(messages) {
 		}
 	}
 	return subjects
+}
+
+export function sortArrayByTime(arr) {
+	return arr.sort(function (a, b) {
+	  if (a.timestamp < b.timestamp) {
+	    return 1;
+	  }
+	  if (a.timestamp > b.timestamp) {
+	    return -1;
+	  }
+	  return 0;
+	});
 }

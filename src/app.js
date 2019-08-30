@@ -30,11 +30,6 @@ export default class App extends React.Component {
     this.onClickListItem = this.onClickListItem.bind(this);
   }
 
-  onClickListItem(e) {
-    let par = e.currentTarget.getAttribute('data-subject')
-    this.setState({activeSubject: par});
-  }
-
   componentDidMount() {
     // const loadData = () => JSON.parse(JSON.stringify(jsonMessages));
     // log.info(Message._rise);
@@ -43,10 +38,15 @@ export default class App extends React.Component {
     this.getMessages()
   }
 
+  onClickListItem(e) {
+    let par = e.currentTarget.getAttribute('data-subject')
+    this.setState({activeSubject: par});
+  }
+
   getMessages() {
     Message.getAll({start: 0, count: 10})
       .then((messages) => {
-          if (!messages.length) {
+          if (messages && messages.length === 0) {
             messages = defMes;
             log.info("Load default messages")
           }
@@ -120,7 +120,7 @@ const defMes =  [{"id": 1,
                "subject": "test", 
                "from": "Dan", 
                "to": "server",  
-               "text": "test message", 
+               "body": {"text": "test message"}, 
                "timestamp": "2019-08-25T10:30:17.970Z", 
                "status": "active"
                },
@@ -128,7 +128,7 @@ const defMes =  [{"id": 1,
                "subject": "test2", 
                "from": "Dan2", 
                "to": "server2",  
-               "text": "test message2", 
+               "body": {"text": "test message2"}, 
                "timestamp": "2019-08-26T22:30:17.970Z", 
                "status": "active"
                },
@@ -136,8 +136,8 @@ const defMes =  [{"id": 1,
                "subject": "test2", 
                "from": "Dan3", 
                "to": "server3",  
-               "text": "test message3", 
-               "timestamp": "2019-08-27T10:30:17.970Z", 
+               "body": {"text": "test message3"}, 
+               "timestamp": "2019-08-28T10:32:17.970Z", 
                "status": "active"
                },
                {"id": 4,
@@ -145,7 +145,7 @@ const defMes =  [{"id": 1,
                "type": "update",
                "from": "Dan3", 
                "to": "server3",  
-               "text": "test message3", 
+               "body": {"text": "test message3"}, 
                "timestamp": "2019-08-27T10:30:17.970Z", 
                "status": "new"
                }

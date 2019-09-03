@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap'
-import {formatTimedelta, callTimedelta, arr1_minus_arr2, sortArrayByTime} from '../utils'
+import {formatTimedelta, callTimedelta, arr1_minus_arr2, sortArrayByTime} from '../../utils'
 
 
 class MessagesRightList extends React.Component {
@@ -20,9 +20,9 @@ class MessagesRightList extends React.Component {
   		)
   		let sortedMessages = sortArrayByTime(subjectsArray)
   		let objectsList = 
-  			sortedMessages.map((m) => {
+  			sortedMessages.map((m, index) => {
 	        return (
-			    	<Row className='container'>
+			    	<Row className='container' key={`message-${m.id}`} >
 			    		<Col >
 				    		<i className='fa fa-chevron-down pl-1'> {m.from} </i>
 				    		<i className='fa fa-arrow-right pl-1'> {arr1_minus_arr2(m.involved, m.from)} </i>

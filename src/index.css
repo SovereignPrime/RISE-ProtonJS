@@ -20,15 +20,10 @@
 	min-height: 400px;
 }
 
-.update-link:hover{
+.update-link:hover, .custom-link:hover{
 	cursor: pointer;
 }
-/*.profile-dropdown {
-	margin-left:20px;
+
+.active-tree-item:before {
+  content: "\f0da";
 }
-.profile-dropdown:before {
-  content: "123";
-  display: inline-block;
-  float: left;
-  background-color: red;
-}*/

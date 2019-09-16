@@ -10,6 +10,7 @@ import GlobeMenu from './components/globeMenu'
 import UpdatesScreen from './components/updates/UpdatesScreen'
 import ContactsScreen from './components/contacts/ContactsScreen'
 import TasksScreen from './components/tasks/TasksScreen'
+import defData from "../test/default_data.json"
 
 const supportEmail = 'support@severeignprime.com'
 
@@ -21,6 +22,8 @@ export default class App extends React.Component {
       searchValue: '',
       messages: [],
       subjects: [],
+      contacts: [],
+      groups: [],
       activeSubject: undefined,
       activeScreen: 'Updates'
     };
@@ -30,6 +33,8 @@ export default class App extends React.Component {
     this.getMessages = this.getMessages.bind(this);
     this.refreshMessages = this.refreshMessages.bind(this);
     this.openMsgItem = this.openMsgItem.bind(this);
+    
+
   }
 
   componentDidMount() {
@@ -37,7 +42,11 @@ export default class App extends React.Component {
     // log.info(Message._rise);
     let cid = rise.id()
       .then((id) => {log.info('cid:', id)});
-    this.getMessages()
+    this.getMessages();
+    this.setState(state => ({
+      contacts: defData["contacts"],
+      groups: defData["groups"]
+    }));
   }
 
   openMsgItem(e) {
@@ -49,7 +58,7 @@ export default class App extends React.Component {
     Message.getAll({start: 0, count: 10})
       .then((messages) => {
           if (messages && messages.length === 0) {
-            messages = defMes;
+            messages = defData["messages"];
             log.info('Load default messages')
           }
           this.setState(state => ({
@@ -71,8 +80,7 @@ export default class App extends React.Component {
   }
 
   changeScreen(event) {
-    let screen = event.target.getAttribute('value')
-    console.log(screen);
+    let screen = event.target.getAttribute('screen') || event.target.parentNode.getAttribute('screen');
     this.setState({activeScreen: screen});
   }
 
@@ -93,7 +101,10 @@ export default class App extends React.Component {
         break;
       case 'Contacts':
         screen = 
-          <ContactsScreen/>
+          <ContactsScreen
+            contacts={this.state.contacts}
+            groups={this.state.groups}
+          />
         break;
       default:
         screen = 
@@ -114,6 +125,7 @@ export default class App extends React.Component {
             onSubmit={this.handleSearch} 
           />
           <PlusMenu/>
+          
         </Row>
 
         <NavbarMenu 
@@ -122,45 +134,8 @@ export default class App extends React.Component {
         />
 
         {screen}
-        
       </Container>
     );
   }
 
 }
-
-
-const defMes =  [{'id': 1,
-               'subject': 'test', 
-               'from': 'Dan', 
-               'to': 'server',  
-               'body': {'text': 'test message'}, 
-               'timestamp': '2019-08-25T10:30:17.970Z', 
-               'status': 'active'
-               },
-               {'id': 2,
-               'subject': 'test2', 
-               'from': 'Dan2', 
-               'to': 'server2',  
-               'body': {'text': 'test message2'}, 
-               'timestamp': '2019-08-26T22:30:17.970Z', 
-               'status': 'active'
-               },
-               {'id': 3,
-               'subject': 'test2', 
-               'from': 'Dan3', 
-               'to': 'server3',  
-               'body': {'text': 'test message3'}, 
-               'timestamp': '2019-08-28T10:32:17.970Z', 
-               'status': 'active'
-               },
-               {'id': 4,
-               'subject': 'upd',
-               'type': 'update',
-               'from': 'Dan3', 
-               'to': 'server3',  
-               'body': {'text': 'test message3'}, 
-               'timestamp': '2019-08-27T10:30:17.970Z', 
-               'status': 'new'
-               }
-]

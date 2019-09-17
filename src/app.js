@@ -19,6 +19,7 @@ export default class App extends React.Component {
     log.info('init')
     super(props);
     this.state = {
+      cid: undefined,
       searchValue: '',
       messages: [],
       subjects: [],
@@ -41,7 +42,10 @@ export default class App extends React.Component {
     // const loadData = () => JSON.parse(JSON.stringify(jsonMessages));
     // log.info(Message._rise);
     let cid = rise.id()
-      .then((id) => {log.info('cid:', id)});
+      .then((id) => {
+        log.info('cid:', id);
+        this.setState({cid: id})
+      });
     this.getMessages();
     this.setState(state => ({
       contacts: defData["contacts"],
@@ -104,6 +108,7 @@ export default class App extends React.Component {
           <ContactsScreen
             contacts={this.state.contacts}
             groups={this.state.groups}
+            cid={this.state.cid}
           />
         break;
       default:

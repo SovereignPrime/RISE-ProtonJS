@@ -24,6 +24,6 @@
 	cursor: pointer;
 }
 
-.active-tree-item:before {
-  content: "\f0da";
+.active-tree-item {
+  background-color: #6c757d;
 }

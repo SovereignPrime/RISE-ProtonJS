@@ -4,6 +4,9 @@ import {formatTimedelta, callTimedelta, getLastMessage} from '../../utils'
 
 
 class MessagesLeftList extends React.Component {
+  openMsgItem(e, subject) {
+    this.props.selectSubject(subject)
+  }
 
   render() {
   	
@@ -16,12 +19,11 @@ class MessagesLeftList extends React.Component {
   			this.props.subjects.map((subject, index) => {
   				let m = getLastMessage(this.props.messages[subject]);
   				let icon = (m.type == 'update') ? 'tasks' : 'envelope';
-  				let activeClass = (subject === this.props.activeSubject) ? 'fa fa-arrow-right' : '';
+  				let activeClass = (subject === this.props.selectedSubject) ? 'fa fa-arrow-right' : '';
 
 	        return (
-        			<Row key={`${subject}-${index}`} className={`container border-right update-link pb-2`} 
-        				onClick={this.props.onClick}
-        				data-subject={subject}
+        			<Row key={`${subject}-${index}`} className={'container border-right update-link pb-2'} 
+        				onClick={(e) => this.openMsgItem(e, subject)}
         			>
 				    		<Col xs={8}>
 					    		<i className={`fa fa-${icon}`}>

@@ -6,7 +6,7 @@ import {formatTimedelta, callTimedelta, arr1_minus_arr2, sortArrayByTime} from '
 class MessagesRightList extends React.Component {
 
   render() {
-  	let subjectsArray = this.props.messages[this.props.activeSubject];
+  	let subjectsArray = this.props.messages[this.props.selectedSubject];
   	let hasMessages =  Array.isArray(subjectsArray) && 
   		(Object.keys(subjectsArray).length !== 0);
   	let renderData;
@@ -15,7 +15,7 @@ class MessagesRightList extends React.Component {
   		let icon = (subjectsArray[0].type == 'update') ? 'tasks' : 'envelope';
   		let header = (
   			<i className={`fa fa-${icon}`}>
-					<b className='text-uppercase pl-1'>{this.props.activeSubject}</b>
+					<b className='text-uppercase pl-1'>{this.props.selectedSubject}</b>
 				</i>
   		)
   		let sortedMessages = sortArrayByTime(subjectsArray)

@@ -1,33 +1,30 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap'
+import {connect} from 'react-redux'
+
 import Tree  from '../tree'
-// import Tree  from '../treeview'
 
 
 class ContactsScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      choosenContactId: this.props.cid
-    };
     this.handleContactClick = this.handleContactClick.bind(this);
   } 
 
-  handleContactClick(event, id) {
-    this.setState(
-      {choosenContactId: id}
-    )
+  handleContactClick(event, contact) {
+    this.props.selectContact(contact)
   }
 
   render() {
     const contactsOfGroup = 
-      this.props.contacts.map((contact) => 
+      this.props.contacts.contactsList.map((contact) => 
         {
-          let mbActive=this.state.choosenContactId == contact.id;
+          let mbActive=this.props.contacts.selectedContact == contact;
           return (
-            <div key={`contacts-${contact.id}`} 
-              className={`custom-link `} 
-              onClick={(e) => this.handleContactClick(e, contact.id)}
+            <div 
+              key={`contacts-${contact.id}`} 
+              className={'custom-link'} 
+              onClick={(e) => this.handleContactClick(e, contact)}
             >
               <input type='checkbox' checked={mbActive} onChange={(e) => (e)} />
               {contact.name}
@@ -37,18 +34,16 @@ class ContactsScreen extends React.Component {
       );
 
     let viewContact = (<div></div>);
-    if (this.state.choosenContactId) {
-      let choosenContact = getContactById(this.state.choosenContactId, this.props.contacts)
-      if (choosenContact) {
-        viewContact = (
-          <div>
-            <div className='text-capitalize'> {choosenContact.name}</div>
-            <div>EMAIL: {choosenContact.email}</div>
-            <div>PHONE: {choosenContact.phone}</div>
-            <div>{choosenContact.address}</div> 
-          </div>
-        )
-      }
+    let choosenContact = this.props.contacts.selectedContact;
+    if (choosenContact) {
+      viewContact = (
+        <div>
+          <div className='text-capitalize'> {choosenContact.name}</div>
+          <div>EMAIL: {choosenContact.email}</div>
+          <div>PHONE: {choosenContact.phone}</div>
+          <div>ADDRESS: {choosenContact.address}</div> 
+        </div>
+      )
     } 
         
 
@@ -57,10 +52,11 @@ class ContactsScreen extends React.Component {
         <Col xs={2} >
           <div className='font-weight-bold custom-link'>My accounts</div>
           <label>All contacts</label>
-          <Tree data={this.props.groups} 
+          <Tree data={this.props.contacts.groups} 
             itemName={'name'} 
             childrenKeyword={'subgroups'} 
             treeName={'groups'}
+            selectAction={this.props.selectGroup}
           />
         </Col>
         <Col xs={2} >
@@ -75,7 +71,6 @@ class ContactsScreen extends React.Component {
 
 }
 
-export default ContactsScreen;
 
 function getContactById(id, contacts) {
   let found;
@@ -87,3 +82,6 @@ function getContactById(id, contacts) {
   }
   return found;
 }
+
+
+export default ContactsScreen;

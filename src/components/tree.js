@@ -6,9 +6,10 @@ export default class Tree extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItemId: undefined
+      activeItemId: null
     };
     this.openTreeItem = this.openTreeItem.bind(this)
+    this.setActiveItem = this.setActiveItem.bind(this)
     this.viewTree = this.viewTree.bind(this)
   } 
 
@@ -16,11 +17,13 @@ export default class Tree extends React.Component {
     if (e.target.previousSibling) {
       e.target.previousSibling.click()
     }
-    let id = (e.currentTarget.getAttribute('data-id'))
-    console.log(id);
+  }
+
+  setActiveItem(e, item){
     this.setState(
-      {activeItemId: id}
+      {activeItemId: item.id}
     )
+    this.props.selectAction(item)
   }
 
   render() {
@@ -45,8 +48,12 @@ export default class Tree extends React.Component {
   viewTree(item, childrenKeyword, itemName, treeName) {
     let mbActive = this.state.activeItemId == item.id ? 'active-tree-item' : '';
     const label2 = 
-    (<span className={`node custom-link ${mbActive}`} onClick={this.openTreeItem} data-id={item.id}>
-      {item[itemName]} 
+    (<span 
+      className={`node custom-link ${mbActive}`} 
+      onClick={(e) => this.setActiveItem(e, item)} 
+      onDoubleClick={this.openTreeItem} 
+    >
+      { item[itemName] } 
     </span>);
     var currentItem;
     if (item[childrenKeyword] && Object.keys(item[childrenKeyword]).length !== 0) {

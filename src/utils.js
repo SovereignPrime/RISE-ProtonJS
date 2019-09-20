@@ -81,3 +81,22 @@ export function sortArrayByTime(arr) {
 	  return 0;
 	});
 }
+
+export function list_to_tree(list, childrenKey='children', parentKey='parent') {
+    var map = {}, node, roots = [], i;
+    for (let i = 0; i < list.length; i += 1) {
+        map[list[i].id] = i; // initialize the map
+        list[i][childrenKey] = []; // initialize the children
+    }
+    for (let i = 0; i < list.length; i += 1) {
+        node = list[i];
+        if (node[parentKey] && parseInt(node[parentKey]) > 0 ) {
+            // if you have dangling branches check that map[node[parentKey]] exists
+            list[map[node[parentKey]]][childrenKey].push(node);
+        } else {
+            roots.push(node);
+        }
+    }
+    return roots;
+}
+

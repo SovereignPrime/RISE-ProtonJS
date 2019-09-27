@@ -3,21 +3,70 @@ import { Row, Col } from 'react-bootstrap'
 import {connect} from 'react-redux'
 
 import Tree  from '../tree'
+import {getListByItemIds} from '../../utils'
 
 
 class ContactsScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      myAccount: false
+    }
     this.handleContactClick = this.handleContactClick.bind(this);
+    this.handleGroupClick = this.handleGroupClick.bind(this);
+    this.filterContantsByGroup = this.filterContantsByGroup.bind(this);
+    this.selectAllContacts = this.selectAllContacts.bind(this);
+    this.chooseMyAccount = this.chooseMyAccount.bind(this);
   } 
 
   handleContactClick(event, contact) {
     this.props.selectContact(contact)
   }
 
+  handleGroupClick(group) {
+    this.setState({myAccount: false});
+    $('.active-tree-item').removeClass('active-tree-item');
+    this.props.selectGroup(group);
+    if (this.props.contacts.selectedGroup != group) {
+      this.props.selectContact(null)
+    }
+  }
+
+  filterContantsByGroup() {
+    let contacts;
+    if (this.state.myAccount) {
+      contacts=this.props.contacts.contactsList.filter((contact) => contact.my)
+    }
+    else if (this.props.contacts.selectedGroup) {
+      contacts = getListByItemIds(this.props.contacts.selectedGroup.contacts, this.props.contacts.contactsList)
+    } 
+    else {
+      return this.props.contacts.contactsList
+    }
+    return contacts
+  }
+
+  selectAllContacts(e) {
+    this.setState({myAccount: false})
+    this.props.selectGroup(null);
+    $('.active-tree-item').removeClass('active-tree-item');
+    e.target.classList.add('active-tree-item');
+  }
+
+  chooseMyAccount(e) {
+    this.props.selectContact(null);
+    this.props.selectGroup(null);
+    this.setState({myAccount: true});
+    $('.active-tree-item').removeClass('active-tree-item');
+    e.target.classList.add('active-tree-item');
+  }
+
+  
   render() {
-    const contactsOfGroup = 
-      this.props.contacts.contactsList.map((contact) => 
+    // view contacts of selected Group or All contacts:
+    let contantsOfGroup = this.filterContantsByGroup();
+    const viewContactsOfGroup = 
+      contantsOfGroup.map((contact) => 
         {
           let mbActive=this.props.contacts.selectedContact == contact;
           return (
@@ -33,7 +82,9 @@ class ContactsScreen extends React.Component {
         }
       );
 
-    let viewContact = (<div></div>);
+    // view selected contact:
+    let viewContact = 
+      (<div className='text-capitalize font-weight-bold'>No contact currently selected</div>);
     let choosenContact = this.props.contacts.selectedContact;
     if (choosenContact) {
       viewContact = (
@@ -45,22 +96,27 @@ class ContactsScreen extends React.Component {
         </div>
       )
     } 
-        
 
     return(
       <Row>
         <Col xs={2} >
-          <div className='font-weight-bold custom-link'>My accounts</div>
-          <label>All contacts</label>
-          <Tree data={this.props.contacts.groups} 
-            itemName={'name'} 
-            childrenKeyword={'subgroups'} 
-            treeName={'groups'}
-            selectAction={this.props.selectGroup}
-          />
+          <div className='font-weight-bold custom-link' onClick={this.chooseMyAccount}>
+            My accounts
+          </div>
+          <div>
+            <div className='custom-link' onClick={this.selectAllContacts}>
+              All contacts
+            </div>
+            <Tree data={this.props.contacts.groups} 
+              itemName={'name'} 
+              childrenKeyword={'subgroups'} 
+              treeName={'groups'}
+              selectAction={this.handleGroupClick}
+            />
+          </div>
         </Col>
         <Col xs={2} >
-          {contactsOfGroup}
+          {viewContactsOfGroup}
         </Col>
         <Col xs={8}>
           {viewContact}
@@ -69,18 +125,6 @@ class ContactsScreen extends React.Component {
     );
   }
 
-}
-
-
-function getContactById(id, contacts) {
-  let found;
-  for (let contact of contacts) {
-    if (contact.id == id) {
-      found = contact;
-      break;
-    }
-  }
-  return found;
 }
 
 

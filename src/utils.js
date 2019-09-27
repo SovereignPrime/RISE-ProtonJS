@@ -100,3 +100,28 @@ export function list_to_tree(list, childrenKey='children', parentKey='parent') {
     return roots;
 }
 
+export function getListItemById(id, items) {
+  let found;
+  if (items) {  
+    for (let item of items) {
+      if (item.id == id) {
+        found = item;
+        break;
+      }
+    }
+  }
+  return found;
+}
+
+export function getListByItemIds(ids, items) {
+  let new_items = [];
+  if (ids) {
+    for (let id of ids) {
+      let item = getListItemById(id, items)
+      if (item) {
+        new_items.push(item)
+      }
+    }
+  }
+  return new_items;
+}

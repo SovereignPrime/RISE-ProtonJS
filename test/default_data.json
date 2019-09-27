@@ -31,7 +31,7 @@
         "to": "server3",  
         "body": {"text": "test message3"}, 
         "timestamp": "2019-08-27T10:30:17.970Z", 
-        "status": "new"
+        "status": "New"
         }
     ],
     "contacts": [
@@ -53,6 +53,15 @@
          "status": "active"
         },
         {"name": "name3",
+         "id": 3,
+         "email": "email3",
+         "phone": "+ 8 8099088 90",
+         "photo": "photo",
+         "address": "address, sfds, 33 12",
+         "my": false,
+         "status": "passive"
+        },
+        {"name": "name4",
          "id": 4,
          "email": "email3",
          "phone": "+ 8 8099088 90",
@@ -73,6 +82,7 @@
         "contacts": [4]},
         {"id": 3,
         "name": "g3roup3",
+        "contacts": [3],
         "subgroups": [
             {"id": 5,
             "name": "group5",
@@ -93,35 +103,44 @@
     ],
     "tasks":  [{"name": "name1 sasd dsfvd",
          "id": 1,
-         "due": "due",
+         "due": "Thu Sep 26 2019 12:15:29",
          "name": "+ 8 8099088 90",
          "text": "text",
          "changes": [],
-         "parent": true,
-         "status": "new"
+         "parent": "",
+         "estimate": 1,
+         "status": "New"
         },
         {"name": "name2 sasd dsfvd",
          "id": 2,
-         "due": "due@sdfsd.ru",
+         "due": "Thu Sep 27 2019 12:15:29",
          "text": "+ 8 8099088 901",
          "changes": [],
          "parent": false,
-         "status": "active"
+         "status": "Accepted"
         },
         {"name": "name3",
          "id": 4,
-         "due": "due3",
+         "due": "Thu Sep 28 2019 12:15:29",
          "text": "text",
          "changes": [],
          "parent": 1,
-         "status": "new"
+         "status": "New"
         },
         {"name": "name5",
          "id": 5,
-         "due": "due5",
+         "due": "Thu Sep 29 2019 12:15:29",
          "text": "text5",
          "changes": [],
          "parent": 2,
-         "status": "new"
+         "status": "New"
+        },
+          {"name": "name6",
+         "id": 6,
+         "due": "Thu Sep 30 2019 12:15:29",
+         "text": "text5",
+         "changes": [],
+         "parent": 5,
+         "status": "New"
         }]
 }

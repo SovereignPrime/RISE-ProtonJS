@@ -14,8 +14,9 @@ export default class Tree extends React.Component {
   } 
 
   openTreeItem(e) {
-    if (e.target.previousSibling) {
-      e.target.previousSibling.click()
+    let parent = e.target.parentElement.closest(".node"); 
+    if (parent && parent.previousSibling) {
+      parent.previousSibling.click()
     }
   }
 
@@ -27,14 +28,19 @@ export default class Tree extends React.Component {
   }
 
   render() {
-    let itemName = this.props.itemName
-    let childrenKeyword = this.props.childrenKeyword
-    let treeName = this.props.treeName
+    var {
+      itemName: itemName,
+      childrenKeyword: childrenKeyword,
+      treeName: treeName,
+      icon: icon,
+      data: data
+    } = this.props
+
     let tree = 
-      this.props.data.map((item) => 
+      data.map((item) => 
         { 
           return (
-            this.viewTree(item, childrenKeyword, itemName, treeName)
+            this.viewTree(item, childrenKeyword, itemName, treeName, icon)
           )
         }
       );
@@ -45,23 +51,24 @@ export default class Tree extends React.Component {
     );
   }
 
-  viewTree(item, childrenKeyword, itemName, treeName) {
+  viewTree(item, childrenKeyword, itemName, treeName, icon='') {
     let mbActive = this.state.activeItemId == item.id ? 'active-tree-item' : '';
     const label2 = 
-    (<span 
-      className={`node custom-link ${mbActive}`} 
-      onClick={(e) => this.setActiveItem(e, item)} 
-      onDoubleClick={this.openTreeItem} 
-    >
-      { item[itemName] } 
-    </span>);
+      (<span 
+        className={`node custom-link ${mbActive} noselect`} 
+        onClick={(e) => this.setActiveItem(e, item)} 
+        onDoubleClick={this.openTreeItem} 
+      >
+        <i className={`${icon}`}>{ item[itemName] } </i>
+        
+      </span>);
     var currentItem;
     if (item[childrenKeyword] && Object.keys(item[childrenKeyword]).length !== 0) {
       const children = 
         item[childrenKeyword].map((childrenItem) => 
           {
             return (
-                this.viewTree(childrenItem, childrenKeyword, itemName)
+                this.viewTree(childrenItem, childrenKeyword, itemName, treeName, icon)
             )
           }
         )

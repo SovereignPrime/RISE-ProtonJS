@@ -25,3 +25,8 @@ export const initialState = {
   }
 }
 
+export const taskModel = {
+  statuses: [
+    "New", "Accepted", "In Progress", "Complete", "Archived", "Verified"
+  ]
+}

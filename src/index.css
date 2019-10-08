@@ -33,6 +33,16 @@
     padding-left: 20px;
     background-size: contain;
 }
+
+.logo {
+  background: url(../assets/img/logo.png) no-repeat;
+  background-size: contain;
+}
+
+.w-100p {
+  max-width: 100px !important;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -41,4 +51,12 @@
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
+}
+
+#my-vertical-tabs {
+  width: auto;
+  float: left;
+  align-items: center;
+  background-color: black;
+  color: white;
 }

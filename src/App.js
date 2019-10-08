@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Container } from 'react-bootstrap'
 import { rise } from 'risejs'
+import { Tabs } from '@material-ui/core';
 
 import ActiveScreenContainer from './components/ActiveScreenContainer'
 import SearchPanel from './components/search'
@@ -46,18 +47,18 @@ export default class App extends React.Component {
     return (
       <Container fluid={true} id={'window-size'}>
         <Row> 
-          <GlobeMenu onChange={this.changeScreen}/>
+          {/*<GlobeMenu onChange={this.changeScreen}/>*/}
           <SearchPanel 
             onSubmit={this.handleSearch} 
           />
-          <PlusMenu/>
+          {/*<PlusMenu/>*/}
           
         </Row>
 
-        <NavbarMenu 
+       {/* <NavbarMenu 
           supportEmail={supportEmail}
           refresh={this.props.loadMessages}
-        />
+        />*/}
 
         <ActiveScreenContainer />
       </Container>

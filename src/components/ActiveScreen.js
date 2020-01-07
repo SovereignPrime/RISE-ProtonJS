@@ -67,6 +67,16 @@ class ActiveScreen extends React.Component {
         icon: 'note'},
       { name: 'Config',
         icon: 'settings'},
+      { name: 'Triangle',
+        icon: 'change_history_outline'},
+        { name: 'Timer',
+        icon: 'schedule_outline'},
+        { name: 'Adjust',
+        icon: 'radio_button_checked_rounded_outline'},
+        { name: 'Some',
+        icon: 'video_label'},
+        { name: 'Flag',
+        icon: 'flag_outline'},
     ]
     let screensTabs = screens.map((screen, index) => {
       var icon = (<Icon>{screen.icon}</Icon>)
@@ -84,7 +94,7 @@ class ActiveScreen extends React.Component {
             variant='scrollable'
             value={this.state.screenIndex}
             onChange={this.handleChange}
-            aria-label='Vertical tabs example'
+            aria-label='Vertical tabs'
             className={'w-100p'}
         >
           {brand}

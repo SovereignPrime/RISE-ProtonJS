@@ -7,6 +7,7 @@ import UpdatesScreenContainer from './updates/UpdatesScreenContainer'
 import ContactsScreenContainer from './contacts/ContactsScreenContainer'
 import TasksScreenContainer from './tasks/TasksScreenContainer'
 
+import Logo from '../assets/img/logo.png'
 
 function a11yProps(index) {
   return {
@@ -55,7 +56,8 @@ class ActiveScreen extends React.Component {
   }
 
   render() {
-    var iconLogo = <img src='assets/img/logo.png' alt="logo" className={'w-100p'} />
+      console.log("Test 1")
+    var iconLogo = <img src={Logo} alt="logo" className={'w-100p'} />
     var brand = (
       <Tab title='' icon={iconLogo} {...a11yProps(0)}/> 
     );
@@ -69,18 +71,21 @@ class ActiveScreen extends React.Component {
       { name: 'Config',
         icon: 'settings'},
     ]
+
+      console.log("Test 2")
     let screensTabs = screens.map((screen, index) => {
       var icon = (<Icon>{screen.icon}</Icon>)
       return (
-        <Tab key={'screen-tab-'+index} title={screen.name} icon={icon} {...a11yProps({index})} />
+        <Tab key={'screen-tab-' + index} title={screen.name} icon={icon} {...a11yProps({index})} />
       )
     })
+      console.log("Test 3")
     return (
       <div className=''>
         
         <Tabs
             id='my-vertical-tabs'
-            centered={true}
+            //centered={true}
             orientation='vertical'
             variant='scrollable'
             value={this.state.screenIndex}

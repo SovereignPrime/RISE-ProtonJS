@@ -14,6 +14,14 @@ module.exports = [
       },
     },
   },
+    { 
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
+        type: "asset/resource"
+    },
+    { 
+        test: /\.(ttf|eot|svg|png|jp.g|gif)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
+        type: "asset/resource"
+    },
   {
        test: /\.jsx?$/,
        use: {

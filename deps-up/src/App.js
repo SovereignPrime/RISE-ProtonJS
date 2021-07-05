@@ -8,6 +8,7 @@ import NavbarMenu from './components/navbarMenu'
 import GlobeMenu from './components/globeMenu'
 
 
+
 const supportEmail = 'support@severeignprime.com'
 
 
@@ -42,19 +43,10 @@ export default class App extends React.Component {
     return (
       <Container fluid={true} id={'window-size'}>
         <Row> 
-          {/*<GlobeMenu onChange={this.changeScreen}/>*/}
           <SearchPanel 
             onSubmit={this.handleSearch} 
           />
-          {/*<PlusMenu/>*/}
-          
         </Row>
-
-       {/* <NavbarMenu 
-          supportEmail={supportEmail}
-          refresh={this.props.loadMessages}
-        />*/}
-
         <ActiveScreenContainer />
       </Container>
     );

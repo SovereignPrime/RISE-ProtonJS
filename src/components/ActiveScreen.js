@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Tab, Typography, Box, Icon } from '@material-ui/core';
+import {MaterialIcon as Icon} from 'material-icons-react';
+import {Tabs, Tab} from 'react-bootstrap';
 
 import UpdatesScreenContainer from './updates/UpdatesScreenContainer'
 import ContactsScreenContainer from './contacts/ContactsScreenContainer'
 import TasksScreenContainer from './tasks/TasksScreenContainer'
 
+import Logo from '../assets/img/logo.png'
 
 function a11yProps(index) {
   return {
@@ -18,7 +20,7 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-    <Typography
+    <div
       component="div"
       role="tabpanel"
       hidden={value !== index}
@@ -26,8 +28,8 @@ function TabPanel(props) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      <Box p={2}>{children}</Box>
-    </Typography>
+      <div p={2}>{children}</div>
+    </div>
   );
 }
 
@@ -54,7 +56,8 @@ class ActiveScreen extends React.Component {
   }
 
   render() {
-    var iconLogo = <img src='assets/img/logo.png' alt="logo" className={'w-100p'} />
+      console.log("Test 1")
+    var iconLogo = <img src={Logo} alt="logo" className={'w-100p'} />
     var brand = (
       <Tab title='' icon={iconLogo} {...a11yProps(0)}/> 
     );
@@ -68,10 +71,11 @@ class ActiveScreen extends React.Component {
       { name: 'Config',
         icon: 'settings'},
     ]
+
     let screensTabs = screens.map((screen, index) => {
       var icon = (<Icon>{screen.icon}</Icon>)
       return (
-        <Tab key={'screen-tab-'+index} title={screen.name} icon={icon} {...a11yProps({index})} />
+        <Tab eventKey={'screen-tab-' + index} title={screen.name} icon={icon} {...a11yProps({index})} />
       )
     })
     return (
@@ -79,7 +83,7 @@ class ActiveScreen extends React.Component {
         
         <Tabs
             id='my-vertical-tabs'
-            centered={true}
+            //centered={true}
             orientation='vertical'
             variant='scrollable'
             value={this.state.screenIndex}

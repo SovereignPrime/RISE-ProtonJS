@@ -1,11 +1,11 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap'
-import { rise, Message } from 'risejs'
+//import { Message } from 'risejs'
 
 import MessagesRightList from './messagesRightList'
 import MessagesLeftList from './messagesLeftList'
 import { groupMessages, fillSubjects } from '../../utils'
-import defData from "../../../test/default_data.json"
+import defData from "../../default_data.json"
 
 
 class UpdatesScreen extends React.Component {
@@ -18,7 +18,11 @@ class UpdatesScreen extends React.Component {
   }
 
   getMessages() {
-    Message.getAll({start: 0, count: 10})
+      let messages = defData["messages"];
+      //log.info('Load default messages')
+      this.props.loadMessages(groupMessages(messages))
+      this.props.loadSubjects(fillSubjects(messages))
+      /*Message.getAll({start: 0, count: 10})
       .then((messages) => {
           if (messages && messages.length === 0) {
             messages = defData["messages"];
@@ -36,7 +40,7 @@ class UpdatesScreen extends React.Component {
       .catch((e) => {
         console.log("Error when getMessages!");
         log.error(e);
-      });
+      }); */
   }
 
   refreshMessages(event) {

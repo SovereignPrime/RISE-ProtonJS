@@ -1,4 +1,4 @@
-import defData from "../test/default_data.json"
+import defData from "./default_data.json"
 
 
 export const initialState = {

@@ -1,13 +1,12 @@
 import React from 'react';
 import { Row, Container } from 'react-bootstrap'
-import { rise } from 'risejs'
-import { Tabs } from '@material-ui/core';
 
 import ActiveScreenContainer from './components/ActiveScreenContainer'
 import SearchPanel from './components/search'
 import PlusMenu from './components/plusMenu'
 import NavbarMenu from './components/navbarMenu'
 import GlobeMenu from './components/globeMenu'
+
 
 
 const supportEmail = 'support@severeignprime.com'
@@ -22,10 +21,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    rise.id()
-      .then((id) => {
-        this.props.loadRiseId(id)
-      });
+        this.props.loadRiseId("1234567890")
   }
 
   changeScreen(event) {
@@ -47,19 +43,10 @@ export default class App extends React.Component {
     return (
       <Container fluid={true} id={'window-size'}>
         <Row> 
-          {/*<GlobeMenu onChange={this.changeScreen}/>*/}
           <SearchPanel 
             onSubmit={this.handleSearch} 
           />
-          {/*<PlusMenu/>*/}
-          
         </Row>
-
-       {/* <NavbarMenu 
-          supportEmail={supportEmail}
-          refresh={this.props.loadMessages}
-        />*/}
-
         <ActiveScreenContainer />
       </Container>
     );

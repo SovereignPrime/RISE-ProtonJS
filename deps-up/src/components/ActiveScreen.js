@@ -72,14 +72,12 @@ class ActiveScreen extends React.Component {
         icon: 'settings'},
     ]
 
-      console.log("Test 2")
     let screensTabs = screens.map((screen, index) => {
       var icon = (<Icon>{screen.icon}</Icon>)
       return (
-        <Tab key={'screen-tab-' + index} title={screen.name} icon={icon} {...a11yProps({index})} />
+        <Tab eventKey={'screen-tab-' + index} title={screen.name} icon={icon} {...a11yProps({index})} />
       )
     })
-      console.log("Test 3")
     return (
       <div className=''>
         

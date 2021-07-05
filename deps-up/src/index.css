@@ -29,13 +29,13 @@
 }
 
 .fa-task {
-	background: url(../assets/img/tasks.svg) no-repeat;
+	background: url(./assets/img/tasks.svg) no-repeat;
     padding-left: 20px;
     background-size: contain;
 }
 
 .logo {
-  background: url(../assets/img/logo.png) no-repeat;
+  background: url(./assets/img/logo.png) no-repeat;
   background-size: contain;
 }
 

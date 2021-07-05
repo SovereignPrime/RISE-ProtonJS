@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import 'react-treeview/react-treeview.css'
 import 'react-datepicker/dist/react-datepicker.css'
-//import './index.css'
+import './index.css'
 
 // const log = require('electron-log');
 const store = createStore(allReducers, initialState)

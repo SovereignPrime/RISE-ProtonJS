@@ -35,7 +35,7 @@
 }
 
 .logo {
-  background: url(./assets/img/logo.png) no-repeat;
+  background: url(./assets/img/logo_new.png) no-repeat;
   background-size: contain;
 }
 
@@ -59,4 +59,8 @@
   align-items: center;
   background-color: black;
   color: white;
+}
+
+.bg-yellow {
+    background-color: rgb(247, 230, 204);
 }

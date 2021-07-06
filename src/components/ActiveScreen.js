@@ -7,7 +7,7 @@ import UpdatesScreenContainer from './updates/UpdatesScreenContainer'
 import ContactsScreenContainer from './contacts/ContactsScreenContainer'
 import TasksScreenContainer from './tasks/TasksScreenContainer'
 
-import Logo from '../assets/img/logo.png'
+import Logo from '../assets/img/logo_new.png'
 
 function a11yProps(index) {
   return {
@@ -89,22 +89,22 @@ class ActiveScreen extends React.Component {
       )
     })
     return (
-      <div className=''>
-        
-        <Tabs
-            id='my-vertical-tabs'
-            //centered={true}
-            orientation='vertical'
-            variant='scrollable'
-            value={this.state.screenIndex}
-            onChange={this.handleChange}
-            aria-label='Vertical tabs'
-            className={'w-100p'}
-        >
-          {brand}
-          {screensTabs}
-        </Tabs>
-        <TabPanel value={this.state.screenIndex} index={1}>
+        <div className=''>
+          
+          <Tabs
+              id='my-vertical-tabs'
+              //centered={true}
+              orientation='vertical'
+              variant='scrollable'
+              value={this.state.screenIndex}
+              onChange={this.handleChange}
+              aria-label='Vertical tabs'
+              className={'w-100p'}
+          >
+            {brand}
+            {screensTabs}
+          </Tabs>
+          <TabPanel value={this.state.screenIndex} index={1}>
           <UpdatesScreenContainer />
         </TabPanel>
         <TabPanel value={this.state.screenIndex} index={2} >

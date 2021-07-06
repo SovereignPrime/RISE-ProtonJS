@@ -1,8 +1,8 @@
 {
-  "name": "deps-up",
-  "productName": "deps-up",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "name": "RISE",
+  "productName": "RISE",
+  "version": "2.0.0",
+  "description": "Getting things done securely",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",

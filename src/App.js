@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Container } from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap'
 
 import ActiveScreenContainer from './components/ActiveScreenContainer'
 import SearchPanel from './components/search'
@@ -7,6 +8,7 @@ import PlusMenu from './components/plusMenu'
 import NavbarMenu from './components/navbarMenu'
 import GlobeMenu from './components/globeMenu'
 
+import Logo from './assets/img/logo_new.png'
 
 
 const supportEmail = 'support@severeignprime.com'
@@ -41,14 +43,19 @@ export default class App extends React.Component {
    
 
     return (
+        <>
+        <Navbar bg="yellow" className="p-0">
+            <Navbar.Brand href="/" className="p-1">
+                <img src={Logo} alt="RISE" width="100" />
+            </Navbar.Brand>
+            <SearchPanel 
+                onSubmit={this.handleSearch} 
+            />
+        </Navbar>
       <Container fluid={true} id={'window-size'}>
-        <Row> 
-          <SearchPanel 
-            onSubmit={this.handleSearch} 
-          />
-        </Row>
         <ActiveScreenContainer />
       </Container>
+        </>
     );
   }
 

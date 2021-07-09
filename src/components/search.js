@@ -1,21 +1,19 @@
 import React from 'react';
-import { Col } from 'react-bootstrap'
+import { Col, Form, FormControl, InputGroup, Button } from 'react-bootstrap'
 
 class SearchPanel extends React.Component {
   render() {
     return (
-      <Col xs={10} sm={9} md={10} className=''>
-        <form className='form-row row ' onSubmit={this.props.onSubmit}>
-          <Col xs={10} sm={11} >
-            <input className='form-control ' name='searchValue' placeholder='Search' type='search' />
-          </Col>
-          <Col xs={2} sm={1} >
-            <button className='btn btn-info' type='submit' >
-              <i className='fa fa-search'></i>
-            </button>
-          </Col>
-        </form>
-      </Col>
+        <Form className='bg-white w-100 border-bottom' onSubmit={this.props.onSubmit}>
+            <InputGroup style={{height: '80px'}}>
+            <FormControl name='searchValue' className="border-0 h-100" type='search' />
+                <InputGroup.Append>
+                    <Button variant='link' type='submit' className='text-secondary' style={{width: '80px'}}>
+                        <i className='fa fa-search'></i>
+                    </Button>
+            </InputGroup.Append>
+            </InputGroup>
+        </Form>
     );
   }
 }

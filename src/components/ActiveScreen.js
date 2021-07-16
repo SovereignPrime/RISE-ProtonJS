@@ -98,8 +98,10 @@ class ActiveScreen extends React.Component {
           <Row>
               <Col xs={1}
                   className="d-flex flex-column bg-dark"
-                  style={{ height: "calc(100vh - 80px)"}}
-              >
+              style={{ 
+                  height: "calc(100vh - 80px)",
+                  minWidth: '145px',
+              }} >
                   <Nav
                       className="flex-column"
                       onSelect={this.handleChange}

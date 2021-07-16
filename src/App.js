@@ -42,8 +42,8 @@ export default class App extends React.Component {
     return (
         <>
         <Navbar bg="yellow" className="p-0">
-            <Navbar.Brand href="/" className="p-1 m-0" style={{width: '150px'}}>
-                <img src={Logo} alt="RISE" className="img-fluid" />
+            <Navbar.Brand href="/" className="p-1 m-0" style={{minWidth: '130px'}}>
+                <img src={Logo} alt="RISE" className="d-block mx-auto" style={{height: '50px'}}/>
             </Navbar.Brand>
             <SearchPanel 
                 onSubmit={this.handleSearch} 

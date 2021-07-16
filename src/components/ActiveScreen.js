@@ -12,96 +12,80 @@ import UpdatesScreenContainer from './updates/UpdatesScreenContainer'
 import ContactsScreenContainer from './contacts/ContactsScreenContainer'
 import TasksScreenContainer from './tasks/TasksScreenContainer'
 
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      <div p={2}>{children}</div>
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
-};
-
 
 class ActiveScreen extends React.Component {
+    screens = [
+        {
+            name: 'Updates',
+            icon: faEnvelope,
+            cls: <UpdatesScreenContainer />
+        },
+        {
+            name: 'Contacts',
+            icon: faUser,
+            cls: <ContactsScreenContainer />
+
+        },
+        {
+            name: 'Tasks',
+            icon: faCalendarCheck,
+            cls: <TasksScreenContainer />
+        },
+        {
+            name: 'Resources',
+            icon: faPagelines,
+            cls: <UpdatesScreenContainer />
+        },
+
+        {
+            name: 'Karma',
+            icon: faDharmachakra,
+            cls: <UpdatesScreenContainer />
+        },
+        /*{
+              name: 'People square',
+              icon: fa,
+            cls: <UpdatesScreenContainer />
+          }, */
+        {
+            name: 'Justice',
+            icon: faUniversity,
+            cls: <UpdatesScreenContainer />
+        },
+        {
+            name: 'History',
+            icon: faClock,
+            cls: <UpdatesScreenContainer />
+        },
+        {
+            name: 'System',
+            icon: faCog,
+            cls: <UpdatesScreenContainer />
+        },
+    ];
+
   constructor(props) {
     super(props);
     this.state = {
-        screenIndex: 1
+        currentScreen: <UpdatesScreenContainer />
       };
-    this.handleChange = this.handleChange.bind(this);
+
+      this.handleChange = this.handleChange.bind(this);
     
   }  
 
-  handleChange(e, val) {
-    this.setState({ screenIndex: val});
-    // this.props.selectScreen(val)
+  handleChange(index, e) {
+      this.setState({
+          currentScreen: this.screens[index].cls
+      });
   }
 
   render() {
-      const screens = [
-          {
-              name: 'Updates',
-              icon: faEnvelope
-          },
-          {
-              name: 'Contacts',
-              icon: faUser
-          },
-          {
-              name: 'Tasks',
-              icon: faCalendarCheck
-          },
-          {
-              name: 'Resources',
-              icon: faPagelines
-          },
 
-          {
-              name: 'Karma',
-              icon: faDharmachakra
-          },
-          /*{
-              name: 'People square',
-              icon: fa
-          }, */
-          {
-              name: 'Justice',
-              icon: faUniversity
-          },
-          {
-              name: 'History',
-              icon: faClock
-          },
-          {
-              name: 'System',
-              icon: faCog
-          },
-          ]
-
-    let screensTabs = screens.map((screen, index) => {
+    let screensTabs = this.screens.map((screen, index) => {
       return (
           <Nav.Link
+              key={index}
               eventKey={index}
               className="text-light text-center"
             >
@@ -118,22 +102,13 @@ class ActiveScreen extends React.Component {
               >
                   <Nav
                       className="flex-column"
-                      actionKey={0}
                       onSelect={this.handleChange}
                     >
                       {screensTabs}
               </Nav>
           </Col>
           <Col>
-              <TabPanel value={this.state.screenIndex} index={1}>
-                  <UpdatesScreenContainer />
-              </TabPanel>
-              <TabPanel value={this.state.screenIndex} index={2} >
-                  <ContactsScreenContainer />
-              </TabPanel>
-              <TabPanel value={this.state.screenIndex} index={3} >
-                  <TasksScreenContainer />
-              </TabPanel>
+              {this.state.currentScreen}
           </Col>
       </Row>
       </Container>

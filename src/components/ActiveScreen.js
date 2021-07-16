@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {MaterialIcon as Icon} from 'material-icons-react';
-import {Tabs, Tab} from 'react-bootstrap';
+
+import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
+import {faEnvelope, faUser, faCalendarCheck, faClock} from '@fortawesome/free-regular-svg-icons';
+import {faDharmachakra, faCog, faUniversity} from '@fortawesome/free-solid-svg-icons';
+import {faPagelines} from '@fortawesome/free-brands-svg-icons';
+
+import {Container, Row, Col, Nav} from 'react-bootstrap';
 
 import UpdatesScreenContainer from './updates/UpdatesScreenContainer'
 import ContactsScreenContainer from './contacts/ContactsScreenContainer'
 import TasksScreenContainer from './tasks/TasksScreenContainer'
-
-import Logo from '../assets/img/logo_new.png'
 
 function a11yProps(index) {
   return {
@@ -56,64 +59,84 @@ class ActiveScreen extends React.Component {
   }
 
   render() {
-      console.log("Test 1")
-    var iconLogo = <img src={Logo} alt="logo" className={'w-100p'} />
-    var brand = (
-      <Tab title='' icon={iconLogo} {...a11yProps(0)}/> 
-    );
-    const screens = [
-      { name: 'Updates',
-        icon: 'email_outline'},
-      { name: 'Contacts',
-        icon: 'person_outline'},
-      { name: 'Tasks',
-        icon: 'note'},
-      { name: 'Config',
-        icon: 'settings'},
-      { name: 'Triangle',
-        icon: 'change_history_outline'},
-        { name: 'Timer',
-        icon: 'schedule_outline'},
-        { name: 'Adjust',
-        icon: 'radio_button_checked_rounded_outline'},
-        { name: 'Some',
-        icon: 'video_label'},
-        { name: 'Flag',
-        icon: 'flag_outline'},
-    ]
+      const screens = [
+          {
+              name: 'Updates',
+              icon: faEnvelope
+          },
+          {
+              name: 'Contacts',
+              icon: faUser
+          },
+          {
+              name: 'Tasks',
+              icon: faCalendarCheck
+          },
+          {
+              name: 'Resources',
+              icon: faPagelines
+          },
+
+          {
+              name: 'Karma',
+              icon: faDharmachakra
+          },
+          /*{
+              name: 'People square',
+              icon: fa
+          }, */
+          {
+              name: 'Justice',
+              icon: faUniversity
+          },
+          {
+              name: 'History',
+              icon: faClock
+          },
+          {
+              name: 'System',
+              icon: faCog
+          },
+          ]
 
     let screensTabs = screens.map((screen, index) => {
-      var icon = (<Icon>{screen.icon}</Icon>)
       return (
-        <Tab eventKey={'screen-tab-' + index} title={screen.name} icon={icon} {...a11yProps({index})} />
+          <Nav.Link
+              eventKey={index}
+              className="text-light text-center"
+            >
+            <Icon icon={screen.icon} />
+        </Nav.Link>
       )
     })
     return (
-        <div className=''>
-          
-          <Tabs
-              id='my-vertical-tabs'
-              //centered={true}
-              orientation='vertical'
-              variant='scrollable'
-              value={this.state.screenIndex}
-              onChange={this.handleChange}
-              aria-label='Vertical tabs'
-              className={'w-100p'}
-          >
-            {brand}
-            {screensTabs}
-          </Tabs>
-          <TabPanel value={this.state.screenIndex} index={1}>
-          <UpdatesScreenContainer />
-        </TabPanel>
-        <TabPanel value={this.state.screenIndex} index={2} >
-          <ContactsScreenContainer />
-        </TabPanel>
-        <TabPanel value={this.state.screenIndex} index={3} >
-          <TasksScreenContainer />
-        </TabPanel>
-      </div>
+      <Container fluid={true} className='px-0' id={'window-size'}>
+          <Row>
+              <Col xs={1}
+                  className="d-flex flex-column bg-dark"
+                  style={{ height: "calc(100vh - 80px)"}}
+              >
+                  <Nav
+                      className="flex-column"
+                      actionKey={0}
+                      onSelect={this.handleChange}
+                    >
+                      {screensTabs}
+              </Nav>
+          </Col>
+          <Col>
+              <TabPanel value={this.state.screenIndex} index={1}>
+                  <UpdatesScreenContainer />
+              </TabPanel>
+              <TabPanel value={this.state.screenIndex} index={2} >
+                  <ContactsScreenContainer />
+              </TabPanel>
+              <TabPanel value={this.state.screenIndex} index={3} >
+                  <TasksScreenContainer />
+              </TabPanel>
+          </Col>
+      </Row>
+      </Container>
       );
   }
 

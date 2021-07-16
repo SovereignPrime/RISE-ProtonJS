@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row, Container } from 'react-bootstrap'
 import { Navbar } from 'react-bootstrap'
 
 import ActiveScreenContainer from './components/ActiveScreenContainer'
@@ -40,21 +39,17 @@ export default class App extends React.Component {
 
 
   render() {
-   
-
     return (
         <>
         <Navbar bg="yellow" className="p-0">
-            <Navbar.Brand href="/" className="p-1">
-                <img src={Logo} alt="RISE" width="100" />
+            <Navbar.Brand href="/" className="p-1 m-0" style={{width: '150px'}}>
+                <img src={Logo} alt="RISE" className="img-fluid" />
             </Navbar.Brand>
             <SearchPanel 
                 onSubmit={this.handleSearch} 
             />
         </Navbar>
-      <Container fluid={true} id={'window-size'}>
         <ActiveScreenContainer />
-      </Container>
         </>
     );
   }

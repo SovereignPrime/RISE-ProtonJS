@@ -97,9 +97,8 @@ class ActiveScreen extends React.Component {
       <Container fluid={true} className='px-0' id={'window-size'}>
           <Row>
               <Col xs={1}
-                  className="d-flex flex-column bg-dark"
+                  className="d-flex flex-column bg-dark full-height"
               style={{ 
-                  height: "calc(100vh - 80px)",
                   minWidth: '145px',
               }} >
                   <Nav

@@ -73,12 +73,16 @@ export default class Tree extends React.Component {
           }
         )
       currentItem = (
-        <TreeView defaultCollapsed={true} nodeLabel={label2} >
+          <TreeView
+              defaultCollapsed={true}
+              nodeLabel={label2}
+          itemClassName={'m-1 py-2 px-3 rounded-pill bg-light custom-link'}
+          >
           {children}
         </TreeView>
       )
     } else {
-      currentItem = label2;
+        currentItem = (<div className='m-1 py-2 px-3 rounded-pill bg-light custom-link'>label2</div>)
     }
     
     return (

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap'
+import TreeView from 'react-treeview';
+
 import {connect} from 'react-redux'
 
 import Tree  from '../tree'
@@ -99,24 +101,23 @@ class ContactsScreen extends React.Component {
 
     return(
       <Row>
-        <Col xs={2} >
-          <div className='font-weight-bold custom-link' onClick={this.chooseMyAccount}>
-            My accounts
-          </div>
-          <div>
-            <div className='custom-link' onClick={this.selectAllContacts}>
-              All contacts
-            </div>
-            <Tree data={this.props.contacts.groups} 
-              itemName={'name'} 
-              childrenKeyword={'subgroups'} 
-              treeName={'groups'}
-              selectAction={this.handleGroupClick}
-            />
-          </div>
-        </Col>
-        <Col xs={2} >
-          {viewContactsOfGroup}
+        <Col xs={4} className='border-right full-height'>
+          <TreeView
+              nodeLabel="My profile"
+              itemClassName={'m-1 py-2 px-3 rounded-pill bg-light custom-link'}
+          >
+              <TreeView
+                  nodeLabel="All contacts"
+                  itemClassName={'m-1 py-2 px-3 rounded-pill bg-light custom-link'}
+              >
+                <Tree data={this.props.contacts.groups} 
+                  itemName={'name'} 
+                  childrenKeyword={'subgroups'} 
+                  treeName={'groups'}
+                  selectAction={this.handleGroupClick}
+                />
+              </TreeView>
+          </TreeView>
         </Col>
         <Col xs={8}>
           {viewContact}

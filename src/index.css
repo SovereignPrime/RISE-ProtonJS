@@ -64,3 +64,7 @@
 .bg-yellow {
     background-color: rgb(247, 230, 204);
 }
+
+.full-height {
+    height: calc(100vh - 80px)
+}

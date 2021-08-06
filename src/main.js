@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const rise = require('risejs');
 
 import installExtension, {
   REACT_DEVELOPER_TOOLS,
@@ -22,7 +23,11 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    contextIsolation: false,
+    webPreferences: {
+        enableRemoteModule: true,
+        contextIsolation: false,
+        nodeIntegration: true,
+    }
   });
 
   // and load the index.html of the app.

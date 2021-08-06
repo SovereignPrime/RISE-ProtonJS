@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap'
 
+import {rise} from 'risejs';
 import ActiveScreenContainer from './components/ActiveScreenContainer'
 import SearchPanel from './components/search'
 import PlusMenu from './components/plusMenu'

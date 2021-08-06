@@ -8,7 +8,7 @@ module.exports = [
     test: /\.(m?js|node)$/,
     parser: { amd: false },
     use: {
-      loader: '@marshallofsound/webpack-asset-relocator-loader',
+      loader: '@vercel/webpack-asset-relocator-loader',
       options: {
         outputAssetBase: 'native_modules',
       },
@@ -28,10 +28,31 @@ module.exports = [
            loader: 'babel-loader',
            options: {
                exclude: /node_modules/,
-               presets: ['@babel/preset-react']
+               presets: [
+                   [
+                       '@babel/preset-env',
+                       {
+                           targets: {
+                               esmodules: true
+                           }
+                       }
+                   ],
+
+                   '@babel/preset-react'
+               ]
            }
        }
    },
+    {
+        test: /\.tsx?$/,
+        exclude: /(node_modules|.webpack)/,
+        use: {
+            loader: 'ts-loader',
+            options: {
+                transpileOnly: true
+            }
+        }
+    }
   // Put your webpack loader rules in this array.  This is where you would put
   // your ts-loader configuration for instance:
   /**

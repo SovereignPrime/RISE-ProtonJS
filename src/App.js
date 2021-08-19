@@ -1,7 +1,8 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap'
 
-import {rise} from 'risejs';
+//import {Message} from 'risejs';
+import {create} from 'ipfs-http-client';
 import ActiveScreenContainer from './components/ActiveScreenContainer'
 import SearchPanel from './components/search'
 import PlusMenu from './components/plusMenu'
@@ -22,8 +23,12 @@ export default class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);    
   }
 
-  componentDidMount() {
-        this.props.loadRiseId("1234567890")
+  async componentDidMount() {
+      //let id = await rise.id();
+      let ipfs = create({port: 5002});
+      let id = await ipfs.id();
+      console.log(`RISE ID: ${id}`);
+      this.props.loadRiseId("12345678");
   }
 
   changeScreen(event) {

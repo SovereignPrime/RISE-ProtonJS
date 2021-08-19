@@ -1,11 +1,24 @@
 const { app, BrowserWindow } = require('electron');
-const path = require('path');
-const rise = require('risejs');
+
 
 import installExtension, {
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS,
 } from 'electron-devtools-installer';
+
+app.on('session-created', (session) => {
+    session.webRequest.onHeadersReceived((details, callback) => {
+        //console.log(details.responseHeaders);
+        callback({
+            responseHeaders: {
+                ...details.responseHeaders,
+                'Content-Security-Policy': [
+                    "default-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline' https: data:; font-src 'self' https:; script-src-elem 'self' 'unsafe-eval' 'unsafe-inline' data: devtools:; connect-src 'self' 'unsafe-inline' data: http://localhost:*/;"
+                ]
+            }
+        })
+    })
+});
 
 app.whenReady().then(() => {
     installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS], { allowFileAccess: true })
@@ -27,6 +40,7 @@ const createWindow = () => {
         enableRemoteModule: true,
         contextIsolation: false,
         nodeIntegration: true,
+        //preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     }
   });
 

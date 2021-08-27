@@ -2,7 +2,7 @@ import React from 'react';
 import TreeView from 'react-treeview';
 
 
-export default class Tree extends React.Component {
+export class Tree extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,41 +52,72 @@ export default class Tree extends React.Component {
   }
 
   viewTree(item, childrenKeyword, itemName, treeName, icon='') {
-    let mbActive = this.state.activeItemId == item.id ? 'active-tree-item' : '';
+    let isActive = this.state.activeItemId == item.id;
     const label2 = 
       (<span 
-        className={`node custom-link ${mbActive} noselect`} 
+        className={`node custom-link noselect`} 
         onClick={(e) => this.setActiveItem(e, item)} 
         onDoubleClick={this.openTreeItem} 
       >
         <i className={`${icon}`}>{ item[itemName] } </i>
         
       </span>);
-    var currentItem;
-    if (item[childrenKeyword] && Object.keys(item[childrenKeyword]).length !== 0) {
-      const children = 
-        item[childrenKeyword].map((childrenItem) => 
-          {
-            return (
-                this.viewTree(childrenItem, childrenKeyword, itemName, treeName, icon)
-            )
-          }
-        )
-      currentItem = (
-          <TreeView
-              defaultCollapsed={true}
-              nodeLabel={label2}
-          itemClassName={'m-1 py-2 px-3 rounded-pill bg-light custom-link'}
-          >
-          {children}
-        </TreeView>
-      )
-    } else {
-        currentItem = (<div className='m-1 py-2 px-3 rounded-pill bg-light custom-link'>label2</div>)
-    }
+
+      var children = [];
+      if (item[childrenKeyword] && Object.keys(item[childrenKeyword]).length !== 0) {
+          children = item[childrenKeyword].map((childrenItem) => 
+              {
+                  return (
+                      this.viewTree(childrenItem, childrenKeyword, itemName, treeName, icon)
+                  )
+              }
+          )
+      }
     
     return (
-        <div key={`${treeName}-${item.id}`} >{currentItem}</div>
-    )
+        <div key={`${treeName}-${item.id}`} >
+            <TreeElement
+                active={isActive}
+                label={label2}
+            >
+                    {children}
+            </TreeElement>
+        </div>
+      )
   }
+}
+
+export class TreeElement extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      active: false
+    };
+  }
+    render() {
+        let bg = this.props.active ? 'bg-yellow' : 'bg-light',
+            class_ = `m-1 py-2 px-3 rounded-pill ${bg} custom-link`;
+        let {
+            children: children,
+            label: label
+        } = this.props;
+        
+        if (children && children.length != 0) {
+            return (
+                <TreeView 
+                nodeLabel={label}
+                itemClassName={class_}
+            >
+                    {children}
+            </TreeView>
+            )
+        } else {
+            return (
+                <div className={class_}>
+                    {label}
+                </div>
+            )
+        }
+
+    }
 }

@@ -1,9 +1,13 @@
 import React from 'react';
 import {Row, Col} from 'react-bootstrap'
-import TreeView from 'react-treeview';
+import TreeView from 'react-treeview'
+import {EditText} from 'react-edit-text'
 import {Tree, TreeElement}  from '../tree'
 import {getListByItemIds} from '../../utils'
-import {Contact} from 'risejs';
+import {Contact} from 'risejs'
+
+import 'react-edit-text/dist/index.css'
+import defaultAvatar from '../../assets/img/nophoto.png'
 
 
 class ContactsScreen extends React.Component {
@@ -131,53 +135,99 @@ class ContactsScreen extends React.Component {
 class ContactFull extends React.Component {
     constructor(props) {
         super(props);
+        this.handleSave = this.handleSave.bind(this);
+    }
+
+    handleSave({name, value}) {
+        console.log(`${name}: ${value}`);
+        let contact = this.props.contact;
+        contact[name] = value;
+        console.log(contact);
+        contact.save();
     }
 
     render() {
         return (
             <Row className={'bg-yellow'}>
                 <Col>
+                    <img 
+                        className={'img-responsive'}
+                        src={defaultAvatar}
+                    />
                 </Col>
                 <Col>
-                    <Row>
+                    <Row className={'p-1'}>
                         <Col>
-                            {this.props.name}
+                            <EditText 
+                                name='name'
+                                className='w-100'
+                                placeholder='Name Surname'
+                                value={this.props.contact.name}
+                                type='text'
+                                onSave={this.handleSave}
+                            />
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
+                    <Row className={'py-3 border-bottom'}>
+                        <Col xs={2}>
                             Nickname
                         </Col>
                         <Col>
+                            <EditText 
+                                name='nick'
+                                className='w-100'
+                                placeholder='@nickname'
+                                value={this.props.contact.nick}
+                                type='text'
+                                onSave={this.handleSave}
+                            />
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
+                    <Row className={'py-3 border-bottom'}>
+                        <Col xs={2}>
                             Email
                         </Col>
                         <Col>
+                            <EditText 
+                                name='email'
+                                className='w-100'
+                                placeholder='you@example.com'
+                                value={this.props.contact.email}
+                                type='text'
+                                onSave={this.handleSave}
+                            />
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
+                    <Row className={'py-3 border-bottom'}>
+                        <Col xs={2}>
                             Phone
                         </Col>
                         <Col>
+                            <EditText 
+                                name='phone'
+                                className='w-100'
+                                placeholder='+1234567890'
+                                value={this.props.contact.phone}
+                                type='text'
+                                onSave={this.handleSave}
+                            />
+                            {this.props.contact.phone}
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
+                    <Row className={'py-3 border-bottom'}>
+                        <Col xs={2}>
                             RISE ID
                         </Col>
                         <Col>
                             {this.props.contact.cid}
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
+                    <Row className={'py-3 border-bottom'}>
+                        <Col xs={2}>
                             Credibility
                         </Col>
                         <Col>
+                            {this.props.contact.credibility}
                         </Col>
                     </Row>
                 </Col>

@@ -90,21 +90,6 @@ class ContactsScreen extends React.Component {
         }
             );
 
-        // view selected contact:
-        let viewContact = 
-            (<div className='text-capitalize font-weight-bold'>No contact currently selected</div>);
-        let choosenContact = this.props.contacts.selectedContact;
-        if (choosenContact) {
-            viewContact = (
-                <div>
-                    <div className='text-capitalize'> {choosenContact.name}</div>
-                    <div>EMAIL: {choosenContact.email}</div>
-                    <div>PHONE: {choosenContact.phone}</div>
-                    <div>ADDRESS: {choosenContact.address}</div> 
-                </div>
-            )
-        } 
-
         return(
             <Row>
                 <Col xs={4} className='border-right full-height'>
@@ -135,10 +120,31 @@ class ContactsScreen extends React.Component {
 class ContactFull extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            contact: props.contact,
+        };
+        this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
     }
 
-    handleSave({name, value}) {
+    static getDerivedStateFromProps(props, state) {
+        if (state.contact !== props.contact) {
+            return {
+                contact: props.contact,
+            }
+        }
+        return null
+    }
+
+    handleChange(k, v) {
+        console.log(k, v);
+        this.setState((state) => {
+            state.contact[k] = v;
+            return {contact: state.contact, ...state};
+        });
+    }
+
+    handleSave({name, value, previousValue}) {
         console.log(`${name}: ${value}`);
         let contact = this.props.contact;
         contact[name] = value;
@@ -157,79 +163,82 @@ class ContactFull extends React.Component {
                 </Col>
                 <Col>
                     <Row className={'p-1'}>
-                        <Col>
+                        <Col className={'p-2'}>
                             <EditText 
                                 name='name'
                                 className='w-100'
                                 placeholder='Name Surname'
-                                value={this.props.contact.name}
+                                value={this.state.contact.name}
                                 type='text'
+                                onChange={(v) => this.handleChange('name', v)}
                                 onSave={this.handleSave}
                             />
                         </Col>
                     </Row>
                     <Row className={'py-3 border-bottom'}>
-                        <Col xs={2}>
+                        <Col xs={2} className={'p-2'}>
                             Nickname
                         </Col>
                         <Col>
                             <EditText 
-                                name='nick'
-                                className='w-100'
-                                placeholder='@nickname'
-                                value={this.props.contact.nick}
-                                type='text'
-                                onSave={this.handleSave}
-                            />
-                        </Col>
-                    </Row>
-                    <Row className={'py-3 border-bottom'}>
-                        <Col xs={2}>
-                            Email
-                        </Col>
-                        <Col>
-                            <EditText 
-                                name='email'
-                                className='w-100'
-                                placeholder='you@example.com'
-                                value={this.props.contact.email}
-                                type='text'
-                                onSave={this.handleSave}
-                            />
-                        </Col>
-                    </Row>
-                    <Row className={'py-3 border-bottom'}>
-                        <Col xs={2}>
-                            Phone
-                        </Col>
-                        <Col>
-                            <EditText 
-                                name='phone'
-                                className='w-100'
-                                placeholder='+1234567890'
-                                value={this.props.contact.phone}
-                                type='text'
-                                onSave={this.handleSave}
-                            />
-                            {this.props.contact.phone}
-                        </Col>
-                    </Row>
-                    <Row className={'py-3 border-bottom'}>
-                        <Col xs={2}>
-                            RISE ID
-                        </Col>
-                        <Col>
-                            {this.props.contact.cid}
-                        </Col>
-                    </Row>
-                    <Row className={'py-3 border-bottom'}>
-                        <Col xs={2}>
-                            Credibility
-                        </Col>
-                        <Col>
-                            {this.props.contact.credibility}
-                        </Col>
-                    </Row>
+                            name='nick'
+                            className='w-100'
+                            placeholder='@nickname'
+                            value={this.props.contact.nick}
+                            type='text'
+                            onChange={(v) => this.handleChange('nick', v)}
+                            onSave={this.handleSave}
+                        />
+                            </Col>
+                        </Row>
+            <Row className={'py-3 border-bottom'}>
+                <Col xs={2} className={'p-2'}>
+                    Email
+                </Col>
+                <Col>
+                    <EditText 
+                    name='email'
+                    className='w-100'
+                    placeholder='you@example.com'
+                    value={this.state.contact.email}
+                    type='email'
+                    onChange={(v) => this.handleChange('email', v)}
+                    onSave={this.handleSave}
+                />
+                    </Col>
+                </Row>
+            <Row className={'py-3 border-bottom'}>
+                <Col xs={2} className={'p-2'}>
+                    Phone
+                </Col>
+                <Col>
+                    <EditText 
+                    name='phone'
+                    className='w-100'
+                    placeholder='+1234567890'
+                    value={this.state.contact.phone}
+                    type='phone'
+                    onChange={(v) => this.handleChange('phone', v)}
+                    onSave={this.handleSave}
+                />
+                </Col>
+            </Row>
+            <Row className={'py-3 border-bottom'}>
+                <Col xs={2}>
+                    RISE ID
+                </Col>
+                <Col>
+                    {this.state.contact.cid}
+                </Col>
+            </Row>
+            <Row className={'py-3 border-bottom'}>
+                <Col xs={2}>
+                    Credibility
+                </Col>
+                <Col>
+                    {this.state.contact.credibility}
+                </Col>
+            </Row>
                 </Col>
             </Row>
         );

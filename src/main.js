@@ -13,7 +13,7 @@ app.on('session-created', (session) => {
             responseHeaders: {
                 ...details.responseHeaders,
                 'Content-Security-Policy': [
-                    "default-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline' https: data:; font-src 'self' https:; script-src-elem 'self' 'unsafe-eval' 'unsafe-inline' data: devtools:; connect-src 'self' 'unsafe-inline' data: http://localhost:*/;"
+                    "default-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline' https: data:; font-src 'self' https:; script-src-elem 'self' 'unsafe-eval' 'unsafe-inline' data: devtools:; connect-src 'self' 'unsafe-inline' data: http://localhost:*/; img-src 'self' 'unsafe-inline' data: http://localhost:*/ http://127.0.0.1:*/;"
                 ]
             }
         })

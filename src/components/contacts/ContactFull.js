@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Col, Card} from 'react-bootstrap'
+import {Container, Row, Col, Card, Form} from 'react-bootstrap'
 import {EditText} from 'react-edit-text'
 
 import 'react-edit-text/dist/index.css'
@@ -8,11 +8,19 @@ import defaultAvatar from '../../assets/img/nophoto.png'
 class ContactFull extends React.Component {
     constructor(props) {
         super(props);
+
+        var avatar = defaultAvatar;
+
+        if (this.props.contact.avatar)
+            avatar = 'http://localhost:9090/ipfs/' + this.props.contact.avatar;
+
         this.state = {
             contact: props.contact,
+            avatar: avatar,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
+        this.handleAvatarUpload = this.handleAvatarUpload.bind(this);
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -40,6 +48,18 @@ class ContactFull extends React.Component {
         contact.save();
     }
 
+    async handleAvatarUpload(event) {
+        let file = event.target.files[0];
+        if (file) {
+            let contact = await this.state.contact.uploadAvatar(file.stream());
+            this.setState((state) => {
+                return {
+                    contact: contact,
+                }
+            });
+        }
+    }
+
     render() {
         return (
             <Card className={'m-0'}>
@@ -47,90 +67,96 @@ class ContactFull extends React.Component {
                     <Col xs={4}>
                         <img 
                         className={'img-fluid rounded-start'}
-                        src={defaultAvatar}
-                    />
-                        </Col>
-                        <Col className={'p-2'}>
-                            <Card.Body className={'p-1'}>
-                                <Card.Title className={'p-2'}>
-                                    <EditText 
-                                    name='name'
-                                    className='w-100'
-                                    placeholder='Name Surname'
-                                    value={this.state.contact.name}
-                                    type='text'
-                                    onChange={(v) => this.handleChange('name', v)}
-                                    onSave={this.handleSave}
-                                />
-                                    </Card.Title>
-                                    <Container fluid={true}>
+                        src={this.state.contact.avatar_url}
+                        />
+                        <Form.Control 
+                            type='file'
+                            size='lg' 
+                            variant='light'
+                            onChange={this.handleAvatarUpload}
+                        />
+                    </Col>
+                    <Col className={'p-2'}>
+                        <Card.Body className={'p-1'}>
+                            <Card.Title className={'p-2'}>
+                                <EditText 
+                                name='name'
+                                className='w-100'
+                                placeholder='Name Surname'
+                                value={this.state.contact.name}
+                                type='text'
+                                onChange={(v) => this.handleChange('name', v)}
+                                onSave={this.handleSave}
+                            />
+                                </Card.Title>
+                                <Container fluid={true}>
+                                    <Row className={'py-3 border-bottom'}>
+                                        <Col xs={2} className={'p-2'}>
+                                            Nickname
+                                        </Col>
+                                        <Col>
+                                            <EditText 
+                                            name='nick'
+                                            className='w-100'
+                                            placeholder='@nickname'
+                                            value={this.props.contact.nick}
+                                            type='text'
+                                            onChange={(v) => this.handleChange('nick', v)}
+                                            onSave={this.handleSave}
+                                        />
+                                            </Col>
+                                        </Row>
                                         <Row className={'py-3 border-bottom'}>
                                             <Col xs={2} className={'p-2'}>
-                                                Nickname
+                                                Email
                                             </Col>
                                             <Col>
                                                 <EditText 
-                                                name='nick'
+                                                name='email'
                                                 className='w-100'
-                                                placeholder='@nickname'
-                                                value={this.props.contact.nick}
-                                                type='text'
-                                                onChange={(v) => this.handleChange('nick', v)}
+                                                placeholder='you@example.com'
+                                                value={this.state.contact.email}
+                                                type='email'
+                                                onChange={(v) => this.handleChange('email', v)}
                                                 onSave={this.handleSave}
                                             />
                                                 </Col>
                                             </Row>
                                             <Row className={'py-3 border-bottom'}>
                                                 <Col xs={2} className={'p-2'}>
-                                                    Email
+                                                    Phone
                                                 </Col>
                                                 <Col>
                                                     <EditText 
-                                                    name='email'
+                                                    name='phone'
                                                     className='w-100'
-                                                    placeholder='you@example.com'
-                                                    value={this.state.contact.email}
-                                                    type='email'
-                                                    onChange={(v) => this.handleChange('email', v)}
+                                                    placeholder='+1234567890'
+                                                    value={this.state.contact.phone}
+                                                    type='phone'
+                                                    onChange={(v) => this.handleChange('phone', v)}
                                                     onSave={this.handleSave}
                                                 />
                                                     </Col>
                                                 </Row>
                                                 <Row className={'py-3 border-bottom'}>
-                                                    <Col xs={2} className={'p-2'}>
-                                                        Phone
+                                                    <Col xs={2}>
+                                                        RISE ID
                                                     </Col>
                                                     <Col>
-                                                        <EditText 
-                                                        name='phone'
-                                                        className='w-100'
-                                                        placeholder='+1234567890'
-                                                        value={this.state.contact.phone}
-                                                        type='phone'
-                                                        onChange={(v) => this.handleChange('phone', v)}
-                                                        onSave={this.handleSave}
-                                                    />
-                                                        </Col>
-                                                    </Row>
-                                                    <Row className={'py-3 border-bottom'}>
-                                                        <Col xs={2}>
-                                                            RISE ID
-                                                        </Col>
-                                                        <Col>
-                                                            {this.state.contact.cid}
-                                                        </Col>
-                                                    </Row>
-                                                    <Row className={'py-3'}>
-                                                        <Col xs={2}>
-                                                            Credibility
-                                                        </Col>
-                                                        <Col>
-                                                            {this.state.contact.credibility}
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-                                            </Card.Body>
-                                        </Col>
+                                                        {this.state.contact.cid}
+                                                    </Col>
+                                                </Row>
+                                                <Row className={'py-3'}>
+                                                    <Col xs={2}>
+                                                        Credibility
+                                                    </Col>
+                                                    <Col>
+                                                        {this.state.contact.credibility}
+                                                    </Col>
+                                                </Row>
+                                            </Container>
+                                        </Card.Body>
+                                    </Col>
                                     </Row>
                                 </Card>
         );

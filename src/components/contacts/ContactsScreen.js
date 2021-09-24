@@ -3,11 +3,10 @@ import {Row, Col} from 'react-bootstrap'
 import TreeView from 'react-treeview'
 import {Tree, TreeElement}  from '../tree'
 import ContactFull from './ContactFull'
+//import GroupList from './GroupList'
 import {getListByItemIds} from '../../utils'
 import {Contact} from 'risejs'
 
-import 'react-edit-text/dist/index.css'
-import defaultAvatar from '../../assets/img/nophoto.png'
 
 
 class ContactsScreen extends React.Component {
@@ -85,6 +84,7 @@ class ContactsScreen extends React.Component {
                 <Col xs={4} className='border-right full-height'>
                     <TreeElement
                     label="My profile"
+                    active={this.state.currentContact && this.state.currentContact.cid == this.state.me.cid}
                     >
                         <TreeView
                         nodeLabel="All contacts"

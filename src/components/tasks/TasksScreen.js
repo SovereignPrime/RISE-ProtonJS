@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Form } from 'react-bootstrap'
 import DatePicker from "react-datepicker";
 
-import Tree  from '../tree'
+import {Tree}  from '../tree'
 import { list_to_tree } from '../../utils'
 import {taskModel} from  '../../state'
 

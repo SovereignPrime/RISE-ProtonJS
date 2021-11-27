@@ -1,6 +1,9 @@
 import React from 'react';
-import {Container, Row, Col, Card, Form} from 'react-bootstrap'
+import {Container, Row, Col, Card, Form, Button} from 'react-bootstrap'
 import {EditText} from 'react-edit-text'
+
+import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
+import {faCamera} from '@fortawesome/free-solid-svg-icons';
 
 import 'react-edit-text/dist/index.css'
 import defaultAvatar from '../../assets/img/nophoto.png'
@@ -70,11 +73,26 @@ class ContactFull extends React.Component {
                         src={this.state.contact.avatar_url}
                         />
                         <Form.Control 
+                            ref='uploadAvatarBtn'
                             type='file'
-                            size='lg' 
                             variant='light'
+                            className='d-none'
                             onChange={this.handleAvatarUpload}
                         />
+                        <Button 
+                            variant="light"
+                            style={{
+                                position: 'absolute',
+                                bottom: '30px',
+                                left: '30px',
+                                background: 'rgba(200, 200, 200, 0.7)'
+                            }}
+                            className='rounded-pill'
+                            onClick={() => this.refs.uploadAvatarBtn.click()}
+                        >
+                            <Icon icon={faCamera} className='mr-2' />
+                                Edit Photo
+                        </Button>
                     </Col>
                     <Col className={'p-2'}>
                         <Card.Body className={'p-1'}>

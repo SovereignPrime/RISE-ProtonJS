@@ -32,6 +32,7 @@ class ContactsScreen extends React.Component {
     }
 
     handleGroupClick(group) {
+        console.log(group);
         this.setState({myAccount: false});
         $('.active-tree-item').removeClass('active-tree-item');
         this.props.selectGroup(group);
